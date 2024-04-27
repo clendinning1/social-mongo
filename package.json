@@ -1,4 +1,13 @@
 {
+    "name": "social-mongo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "seed": "node utils/seed.js"
+    },
+    "license": "MIT",
     "dependencies": {
         "express": "^4.17.1",
         "mongoose": "^7.0.2"
