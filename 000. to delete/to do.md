@@ -48,9 +48,6 @@
 
 * `PUT` to update a user by its `_id`
 
-* `DELETE` to remove user by its `_id`
-
-
 ---
 
 **`/api/users/:userId/friends/:friendId`**
