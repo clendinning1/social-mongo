@@ -6,8 +6,12 @@ const validateEmail = function (email) {
     return re.test(email)
 };
 
+
+
+
 // new schema
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+    {
     username: { type: String, unique: true, required: true, trim: true },
     email: { 
         type: String,
@@ -18,12 +22,24 @@ const userSchema = new mongoose.Schema({
     },
     // thoughts: [thoughtSchema],
     // friends: [userSchema],
-    
+
     // TO DO: create a virtual called "friendCount" that retrieves the length of the user's friends array field on query.
-});
+    },
+    // {
+    //     toJSON: {
+    //         virtuals: true,
+    //     },
+    //     id: false,
+    // }
+);
+
+
 
 // initialize new schema as model
 const User = mongoose.model('User', userSchema);
+
+
+
 
 // if error when trying to save a document
 const handleError = (err) => console.error(err);
