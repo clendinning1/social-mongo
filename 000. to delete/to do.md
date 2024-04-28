@@ -1,5 +1,5 @@
 1. use mongoose to create the models
-
+2. every time you run the server it recreates the models, adding duplicates...
 
 
 
