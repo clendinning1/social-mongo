@@ -2,8 +2,9 @@
 3. where are these being stored? can i delete them in mongodb compass?
 4. getter method to format the timestamp on query
 
-5. add seeds so new models can be tested
-
+6. fix virtuals
+7. fix delete route
+8. fix put route
 
 
 
@@ -33,8 +34,6 @@
 
 **`/api/users`**
 
-* `GET` all users
-
 * `GET` a single user by its `_id` and populated thought and friend data
 
 * `POST` a new user:
@@ -51,7 +50,6 @@
 
 * `DELETE` to remove user by its `_id`
 
-**BONUS**: Remove a user's associated thoughts when deleted.
 
 ---
 
