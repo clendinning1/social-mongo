@@ -1,9 +1,6 @@
 1. use mongoose to create the models
 2. every time you run the server it recreates the models, adding duplicates...
 3. where are these being stored? can i delete them in mongodb compass?
-4. if i create a reaction schema that isn't a model, does it go in its own file or in the thought.js file?
-
-
 
 
 
