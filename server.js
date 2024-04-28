@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('./config/connection');
-// Require model
+// pull in model
 const { Example } = require('./models');
 
 const PORT = process.env.PORT || 3001;
@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.get('/example', async (req, res) => {
     try {
-        // Using model in route to find all documents that are instances of that model
+        // use model in route to find all documents under that schema/model
         const result = await Example.find({});
         res.status(200).json(result);
     } catch (err) {

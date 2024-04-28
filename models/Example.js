@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// new schema
 const exampleSchema = new mongoose.Schema({
     example: { type: String, required: true },
     stockCount: Number,
@@ -11,10 +12,10 @@ const exampleSchema = new mongoose.Schema({
 // new schema as model
 const Example = mongoose.model('Example', exampleSchema);
 
-// errorwhen trying to save a document
+// if error when trying to save a document
 const handleError = (err) => console.error(err);
 
-// create individual document
+// create individual document for schema
 Example
     .create({
         example: 'banana',
