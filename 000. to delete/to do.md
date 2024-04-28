@@ -2,7 +2,7 @@
 4. getter method to format the timestamp on query
 
 8. fix user put route
-9. thought put route
+        9. thought put route
 10. todo in thoughtController (push the created thought's `_id` to the associated user's `thoughts` array field)
 
 
@@ -24,25 +24,11 @@
 
 ### API Routes
 
-**`/api/users`**
-
-* `GET` a single user by its `_id` and populated thought and friend data
-
----
-
 **`/api/users/:userId/friends/:friendId`**
 
 * `POST` to add a new friend to a user's friend list
 
 * `DELETE` to remove a friend from a user's friend list
-
----
-
-**`/api/thoughts`**
-
-* `PUT` to update a thought by its `_id`
-
-* `DELETE` to remove a thought by its `_id`
 
 ---
 
