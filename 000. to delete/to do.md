@@ -1,8 +1,8 @@
-1. use mongoose to create the models
-2. every time you run the server it recreates the models, adding duplicates...
+
 3. where are these being stored? can i delete them in mongodb compass?
+4. getter method to format the timestamp on query
 
-
+5. add seeds so new models can be tested
 
 
 
@@ -20,37 +20,6 @@
 - WHEN I test API POST, PUT, and DELETE routes in Insomnia THEN I am able to successfully create, update, and delete users and thoughts in my database
 - WHEN I test API POST and DELETE routes in Insomnia THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s 
 
-
-
-
-
-### Models
-
-Use the following guidelines to set up your models and API routes:
-
-**User**:
-
-* `username`
-  * String
-  * Unique
-  * Required
-  * Trimmed
-
-* `email`
-  * String
-  * Required
-  * Unique
-  * Must match a valid email address (look into Mongoose's matching validation)
-
-* `thoughts`
-  * Array of `_id` values referencing the `Thought` model
-
-* `friends`
-  * Array of `_id` values referencing the `User` model (self-reference)
-
-**Schema Settings**:
-
-Create a virtual called `friendCount` that retrieves the length of the user's `friends` array field on query.
 
 
 
