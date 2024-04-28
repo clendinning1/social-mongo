@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
+const Thought = require('./Thought');
 
 // email validator
 const validateEmail = function (email) {
@@ -8,7 +9,7 @@ const validateEmail = function (email) {
 
 
 // new schema
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
     {
         username: { type: String, unique: true, required: true, trim: true },
         email: {
@@ -40,11 +41,11 @@ const userSchema = new mongoose.Schema(
 );
 
 // create a virtual called "reactionCount" that retrieves the length of the user's friends array field on query.
-thoughtSchema.virtual('friendCount').get(function () {
+userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
 // initialize new schema as model
-const User = mongoose.model('User', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;
