@@ -24,19 +24,25 @@ const userSchema = new mongoose.Schema(
                 ref: 'Thought',
             },
         ],
-        // friends: [userSchema],
-
-        // TO DO: create a virtual called "friendCount" that retrieves the length of the user's friends array field on query.
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+            },
+        ],
     },
-    // {
-    //     toJSON: {
-    //         virtuals: true,
-    //     },
-    //     id: false,
-    // }
+    {
+        toJSON: {
+            virtuals: true,
+        },
+        id: false,
+    }
 );
 
-
+// create a virtual called "reactionCount" that retrieves the length of the user's friends array field on query.
+thoughtSchema.virtual('friendCount').get(function () {
+    return this.friends.length;
+});
 
 // initialize new schema as model
 const User = mongoose.model('User', userSchema);
