@@ -3,8 +3,7 @@
 4. getter method to format the timestamp on query
 
 6. fix virtuals
-7. fix delete route
-8. fix put route
+8. fix user put route
 
 
 
@@ -35,18 +34,6 @@
 **`/api/users`**
 
 * `GET` a single user by its `_id` and populated thought and friend data
-
-* `POST` a new user:
-
-```json
-// example data
-{
-  "username": "lernantino",
-  "email": "lernantino@gmail.com"
-}
-```
-
-* `PUT` to update a user by its `_id`
 
 ---
 
