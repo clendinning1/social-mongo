@@ -1,7 +1,6 @@
 
 4. getter method to format the timestamp on query
-
-12.
+12. readme
 
 
 
