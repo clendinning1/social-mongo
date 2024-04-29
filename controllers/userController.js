@@ -71,7 +71,7 @@ module.exports = {
 
             const baseUser = await User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $addToSet: { friends: newFriendData._id } },
+                { $addToSet: { friends: newFriendData } },
                 { new: true }
             );
 
