@@ -1,42 +1,32 @@
 
 4. getter method to format the timestamp on query
 
-8. fix user put route
-        9. thought put route
-10. todo in thoughtController (push the created thought's `_id` to the associated user's `thoughts` array field)
+12.
 
 
 
 # yeah
 - you may also optionally use a JavaScript date library of your choice or the native JavaScript `Date` object to format timestamps.
-- no seed data is provided, so you’ll need to create your own data using Insomnia after you’ve created your API.
-
-
-
-
-
-
-
-
-
 
 
 
 ### API Routes
 
-**`/api/users/:userId/friends/:friendId`**
-
-* `POST` to add a new friend to a user's friend list
-
-* `DELETE` to remove a friend from a user's friend list
-
----
-
 **`/api/thoughts/:thoughtId/reactions`**
 
-* `POST` to create a reaction stored in a single thought's `reactions` array field
-
 * `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,5 @@
 const Thought = require('../models/Thought');
+const User = require('../models/User');
 
 module.exports = {
     // get all thoughts
@@ -25,26 +26,45 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // create a new thought
+    // create a new thought (post)
     async createThought(req, res) {
         try {
             const dbThoughtData = await Thought.create(req.body);
+
+            const user = await User.findOneAndUpdate(
+                { _id: req.body.userId },
+                { $addToSet: { thoughts: dbThoughtData._id } },
+                { new: true }
+            );
+
+            if (!user) {
+                return res.status(404).json({
+                    message: 'Thought created, but found no user with that ID',
+                });
+            }
+
             res.json(dbThoughtData);
-            // TO DO: push the created thought's `_id` to the associated user's `thoughts` array field
+
         } catch (err) {
             res.status(500).json(err);
         }
     },
-    // update a thought
+    // update a thought (put)
     async updateThought(req, res) {
         try {
-            const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, );
+            const newThoughtText = await req.body.thoughtText
+
+            const thought = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $set: { thoughtText: newThoughtText } }
+            );
 
             if (!thought) {
                 return res.status(404).json({ message: 'No thought with that ID' });
             }
 
-            res.json(thought);
+            res.json(newThoughtText);
+
         } catch (err) {
             res.status(500).json(err);
         }
@@ -61,6 +81,45 @@ module.exports = {
             res.json(thought);
         } catch (err) {
             res.status(500).json(err);
+        }
+    },
+
+    // add a reaction to a thought (post)
+    async addReaction(req, res) {
+        try {
+            const newReaction = await req.body;
+
+            const thought = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $addToSet: { reactions: newReaction } },
+                { new: true }
+            );
+
+            res.json(thought);
+
+        } catch (err) {
+            res.status(500).json(err);
+            console.log(err);
+        }
+    },
+    // delete a reaction from a thought
+    async deleteReaction(req, res) {
+        try {
+            // testing: successfully logged reactionToRemove
+            const reactionToRemove = await req.body.reactionId;
+
+            const thought = await Thought.findOneAndUpdate(
+                // testing: successfully logged req.params.thoughtId
+                { _id: req.params.thoughtId },
+                // testing: issue must be the next line (b/c reactions are a schema but not a model?)
+                { $pull: { reactions: reactionToRemove } }
+            );
+
+            res.json(thought);
+
+        } catch (err) {
+            res.status(500).json(err);
+            console.log(err);
         }
     },
 };

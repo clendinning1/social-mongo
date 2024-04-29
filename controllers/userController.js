@@ -25,7 +25,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // create a new user
+    // create a new user (post)
     async createUser(req, res) {
         try {
             const dbUserData = await User.create(req.body);
@@ -34,16 +34,23 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // update a user
+    // update a user (put)
     async updateUser(req, res) {
         try {
-            const user = await User.findOneAndUpdate({ _id: req.params.userId }, { $set: { username: req.params.username, email: req.params.email } });
+            const newUsername = await req.body.username;
+            const newEmail = await req.body.email;
+
+            const user = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $set: { username: newUsername, email: newEmail } }
+            );
 
             if (!user) {
                 return res.status(404).json({ message: 'No user with that ID' });
             }
 
-            res.json(user);
+            res.json(newUsername + ', ' + newEmail);
+
         } catch (err) {
             res.status(500).json(err);
         }
@@ -58,6 +65,52 @@ module.exports = {
             }
 
             res.json(user);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
+    // add a friend (post)
+    async addFriend(req, res) {
+        try {
+            // newFriendData = id of the friend we're trying to add via URL (params)
+            const newFriendData = await req.params.friendId;
+
+            const baseUser = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $addToSet: { friends: newFriendData } },
+                { new: true }
+            );
+
+            if (!baseUser) {
+                return res.status(404).json({
+                    message: 'Invalid base user',
+                });
+            }
+
+            res.json(newFriendData);
+
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    // delete a friend
+    async deleteFriend(req, res) {
+        try {
+            // newFriendData = id of the friend we're trying to delete via URL (params)
+            const friendToRemove = await req.params.friendId;
+
+            const baseUser = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $pull: { friends: friendToRemove } }
+            );
+
+            if (!baseUser) {
+                return res.status(404).json({ message: 'Invalid base user' });
+            }
+
+            res.json(friendToRemove);
+
         } catch (err) {
             res.status(500).json(err);
         }
