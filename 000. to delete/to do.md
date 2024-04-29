@@ -1,8 +1,6 @@
 
 4. getter method to format the timestamp on query
 
-9. thought put route
-
 12.
 
 

@@ -64,7 +64,7 @@ module.exports = {
             }
 
             res.json(newThoughtText);
-            
+
         } catch (err) {
             res.status(500).json(err);
         }
@@ -87,6 +87,15 @@ module.exports = {
     // add a reaction to a thought (post)
     async addReaction(req, res) {
         try {
+            const newReaction = await req.body;
+
+            const thought = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $addToSet: { reactions: newReaction } },
+                { new: true }
+            );
+
+            res.json(thought + `\n` + 'New reaction:' + newReaction);
 
         } catch (err) {
             res.status(500).json(err);
