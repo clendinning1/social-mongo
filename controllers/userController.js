@@ -87,4 +87,21 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    // delete a friend
+    async deleteFriend(req, res) {
+        try {
+            // delete friend id FROM user id
+            // find base user by req.params.userId
+            // delete req.params.friendId from `friends` on base user
+            const baseUser = await User.findOneAndDelete({ _id: req.params.userId });
+
+            if (!baseUser) {
+                return res.status(404).json({ message: 'Invalid base user' });
+            }
+
+            res.json(user);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
 };
