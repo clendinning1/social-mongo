@@ -26,7 +26,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // create a new thought
+    // create a new thought (post)
     async createThought(req, res) {
         try {
             const dbThoughtData = await Thought.create(req.body);
@@ -49,7 +49,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // update a thought
+    // update a thought (put)
     async updateThought(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId },);
@@ -73,6 +73,23 @@ module.exports = {
             }
 
             res.json(thought);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
+    // add a reaction to a thought (post)
+    async addReaction(req, res) {
+        try {
+
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    // delete a reaction from a thought
+    async deleteReaction(req, res) {
+        try {
+
         } catch (err) {
             res.status(500).json(err);
         }
