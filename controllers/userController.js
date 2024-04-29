@@ -38,18 +38,19 @@ module.exports = {
     async updateUser(req, res) {
         try {
             const newUsername = await req.body.username;
+            const newEmail = await req.body.email;
 
             const user = await User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $set: { username: newUsername } }
+                { $set: { username: newUsername, email: newEmail } }
             );
 
             if (!user) {
                 return res.status(404).json({ message: 'No user with that ID' });
             }
 
-            res.json(newUsername);
-            
+            res.json(newUsername + ', ' + newEmail);
+
         } catch (err) {
             res.status(500).json(err);
         }
