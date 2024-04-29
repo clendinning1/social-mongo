@@ -90,10 +90,6 @@ module.exports = {
     // delete a friend
     async deleteFriend(req, res) {
         try {
-            // delete friend id FROM user id
-            // find base user by req.params.userId
-            // delete req.params.friendId from `friends` on base user
-
             // newFriendData = id of the friend we're trying to delete via URL (params)
             const friendToRemove = await req.params.friendId;
 
@@ -107,6 +103,7 @@ module.exports = {
             }
 
             res.json(friendToRemove);
+
         } catch (err) {
             res.status(500).json(err);
         }

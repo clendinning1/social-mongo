@@ -4,7 +4,7 @@
 8. fix user put route
         9. thought put route
 
-11. error if no friend id in adds and removes?
+12.
 
 
 
@@ -16,12 +16,6 @@
 
 
 ### API Routes
-
-**`/api/users/:userId/friends/:friendId`**
-
-* `DELETE` to remove a friend from a user's friend list
-
----
 
 **`/api/thoughts/:thoughtId/reactions`**
 
