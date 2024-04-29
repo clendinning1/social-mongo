@@ -4,7 +4,7 @@
 8. fix user put route
         9. thought put route
 
-11.
+11. error if no friend id in adds and removes?
 
 
 

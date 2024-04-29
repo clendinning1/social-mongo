@@ -93,13 +93,20 @@ module.exports = {
             // delete friend id FROM user id
             // find base user by req.params.userId
             // delete req.params.friendId from `friends` on base user
-            const baseUser = await User.findOneAndDelete({ _id: req.params.userId });
+
+            // newFriendData = id of the friend we're trying to delete via URL (params)
+            const friendToRemove = await req.params.friendId;
+
+            const baseUser = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $pull: { friends: friendToRemove } }
+            );
 
             if (!baseUser) {
                 return res.status(404).json({ message: 'Invalid base user' });
             }
 
-            res.json(user);
+            res.json(friendToRemove);
         } catch (err) {
             res.status(500).json(err);
         }
