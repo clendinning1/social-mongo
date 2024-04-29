@@ -66,11 +66,11 @@ module.exports = {
     // add a friend (post)
     async addFriend(req, res) {
         try {
-            // request = id of the friend we're trying to add
-            const newFriendData = await req.body.friendId;
+            // newFriendData = id of the friend we're trying to add via URL (params)
+            const newFriendData = await req.params.friendId;
 
             const baseUser = await User.findOneAndUpdate(
-                { _id: req.body.userId },
+                { _id: req.params.userId },
                 { $addToSet: { friends: newFriendData._id } },
                 { new: true }
             );
