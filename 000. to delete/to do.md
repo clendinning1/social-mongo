@@ -3,7 +3,8 @@
 
 8. fix user put route
         9. thought put route
-10. todo in thoughtController (push the created thought's `_id` to the associated user's `thoughts` array field)
+
+11.
 
 
 

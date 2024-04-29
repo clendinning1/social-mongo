@@ -43,7 +43,7 @@ module.exports = {
                 });
             }
 
-            res.json('did it');
+            res.json(dbThoughtData);
 
         } catch (err) {
             res.status(500).json(err);
