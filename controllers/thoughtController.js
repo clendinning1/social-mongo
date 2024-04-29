@@ -1,4 +1,5 @@
 const Thought = require('../models/Thought');
+const User = require('../models/User');
 
 module.exports = {
     // get all thoughts
@@ -29,8 +30,21 @@ module.exports = {
     async createThought(req, res) {
         try {
             const dbThoughtData = await Thought.create(req.body);
-            res.json(dbThoughtData);
-            // TO DO: push the created thought's `_id` to the associated user's `thoughts` array field
+
+            const user = await User.findOneAndUpdate(
+                { _id: req.body.userId },
+                { $addToSet: { thoughts: dbThoughtData._id } },
+                { new: true }
+            );
+
+            if (!user) {
+                return res.status(404).json({
+                    message: 'Thought created, but found no user with that ID',
+                });
+            }
+
+            res.json('did it');
+
         } catch (err) {
             res.status(500).json(err);
         }
@@ -38,7 +52,7 @@ module.exports = {
     // update a thought
     async updateThought(req, res) {
         try {
-            const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, );
+            const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId },);
 
             if (!thought) {
                 return res.status(404).json({ message: 'No thought with that ID' });
