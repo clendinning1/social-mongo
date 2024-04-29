@@ -1,6 +1,7 @@
 
 4. getter method to format the timestamp on query
 12. readme
+13. CURRENT ISSUE: delete reactions route, in controllers > thoughtController.js
 
 
 
