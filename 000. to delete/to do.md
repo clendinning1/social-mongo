@@ -10,8 +10,6 @@
 
 # yeah
 - you may also optionally use a JavaScript date library of your choice or the native JavaScript `Date` object to format timestamps.
-- no seed data is provided, so you’ll need to create your own data using Insomnia after you’ve created your API.
-
 
 
 
