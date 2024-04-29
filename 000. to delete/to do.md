@@ -15,8 +15,6 @@
 
 
 
-
-
 ### API Routes
 
 **`/api/users/:userId/friends/:friendId`**

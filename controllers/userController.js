@@ -25,7 +25,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // create a new user
+    // create a new user (post)
     async createUser(req, res) {
         try {
             const dbUserData = await User.create(req.body);
@@ -34,7 +34,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // update a user
+    // update a user (put)
     async updateUser(req, res) {
         try {
             const user = await User.findOneAndUpdate({ _id: req.params.userId }, { $set: { username: req.params.username, email: req.params.email } });
@@ -58,6 +58,31 @@ module.exports = {
             }
 
             res.json(user);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
+    // add a friend (post)
+    async addFriend(req, res) {
+        try {
+            // request = id of the friend we're trying to add
+            const newFriend = await req.body;
+
+            const user = await User.findOneAndUpdate(
+                { _id: req.body.userId },
+                { $addToSet: { friends: newFriend._id } },
+                { new: true }
+            );
+
+            if (!user) {
+                return res.status(404).json({
+                    message: 'Invalid user',
+                });
+            }
+
+            res.json(newFriend);
+
         } catch (err) {
             res.status(500).json(err);
         }
