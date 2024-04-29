@@ -67,21 +67,21 @@ module.exports = {
     async addFriend(req, res) {
         try {
             // request = id of the friend we're trying to add
-            const newFriend = await req.body;
+            const newFriendData = await req.body.friendId;
 
-            const user = await User.findOneAndUpdate(
+            const baseUser = await User.findOneAndUpdate(
                 { _id: req.body.userId },
-                { $addToSet: { friends: newFriend._id } },
+                { $addToSet: { friends: newFriendData._id } },
                 { new: true }
             );
 
-            if (!user) {
+            if (!baseUser) {
                 return res.status(404).json({
-                    message: 'Invalid user',
+                    message: 'Invalid base user',
                 });
             }
 
-            res.json(newFriend);
+            res.json(newFriendData);
 
         } catch (err) {
             res.status(500).json(err);
