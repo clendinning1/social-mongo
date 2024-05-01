@@ -15,6 +15,13 @@ const thoughtSchema = new Schema({
     },
     username: { type: String, required: true, },
     reactions: [ reactionSchema ],
+    // does it need to be typed like below to work?
+    // if so, how do I 'ref' it since it's not
+    //          supposed to be a model?
+    // {
+    //      type: Schema.Types.ObjectId,
+    //      ref: 'reactionSchema',
+    // },
 },
     {
         toJSON: {
