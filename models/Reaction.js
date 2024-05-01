@@ -13,6 +13,12 @@ const reactionSchema = new Schema({
         default: Date.now,
         // TO DO: use a getter method to format the timestamp on query
     },
-});
+},
+    {
+        toJSON: {
+            virtuals: true,
+        },
+        id: false,
+    });
 
 module.exports = reactionSchema;
