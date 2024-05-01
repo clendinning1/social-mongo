@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const Reaction = require('./Reaction');
+const reactionSchema = require('./Reaction');
 
 // parent schema
 const thoughtSchema = new Schema({
@@ -14,7 +14,7 @@ const thoughtSchema = new Schema({
         // TO DO: use a getter method to format the timestamp on query
     },
     username: { type: String, required: true, },
-    reactions: [Reaction],
+    reactions: [ reactionSchema ],
 },
     {
         toJSON: {
