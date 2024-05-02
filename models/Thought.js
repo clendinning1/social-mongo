@@ -1,6 +1,8 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 
+const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+
 // parent schema
 const thoughtSchema = new Schema({
     thoughtText: {
@@ -11,7 +13,7 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: (createdAt) => createdAt.toLocaleDateString("en-US")
+        get: (createdAt) => createdAt.toLocaleDateString("en-US", options)
         // TO DO: use a getter method to format the timestamp on query
     },
     username: { type: String, required: true, },
