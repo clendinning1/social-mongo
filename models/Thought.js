@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 
-const dtOptions = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+// settings for formatting the date and time in the toLocaleDateString getter
+const datetimeOpts = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
 
 // parent schema
 const thoughtSchema = new Schema({
@@ -13,7 +14,7 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: (createdAt) => createdAt.toLocaleDateString("en-US", dtOptions)
+        get: (createdAt) => createdAt.toLocaleDateString("en-US", datetimeOpts)
     },
     username: { type: String, required: true, },
     reactions: [ reactionSchema ],
