@@ -2,7 +2,7 @@
 ## Description
 Become a user, make friends, post your thoughts, and add your reactions with this social media framework.
 ## Usage
-[Walkthrough video]()
+[Walkthrough video](https://drive.google.com/file/d/14uPt5qMzUf8RBnV7rrZ0WklNgXzDkh8D/view)
 ## Sources
 ### Technologies
 - [Express](https://expressjs.com/)
