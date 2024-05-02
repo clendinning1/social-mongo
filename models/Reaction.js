@@ -1,5 +1,8 @@
 const { Schema, Types } = require('mongoose');
 
+// settings for formatting the date and time in the toLocaleDateString getter
+const datetimeOpts = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+
 // reaction schema subdocument
 const reactionSchema = new Schema({
     _id: {
@@ -11,8 +14,15 @@ const reactionSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        // TO DO: use a getter method to format the timestamp on query
+        get: (createdAt) => createdAt.toLocaleDateString("en-US", datetimeOpts)
     },
-});
+},
+    {
+        toJSON: {
+            virtuals: true,
+            getters: true
+        },
+        id: false,
+    });
 
 module.exports = reactionSchema;
