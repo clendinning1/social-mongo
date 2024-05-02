@@ -11,21 +11,16 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
+        get: (createdAt) => createdAt.toLocaleDateString("en-US")
         // TO DO: use a getter method to format the timestamp on query
     },
     username: { type: String, required: true, },
     reactions: [ reactionSchema ],
-    // does it need to be typed like below to work?
-    // if so, how do I 'ref' it since it's not
-    //          supposed to be a model?
-    // {
-    //      type: Schema.Types.ObjectId,
-    //      ref: 'reactionSchema',
-    // },
 },
     {
         toJSON: {
             virtuals: true,
+            getters: true
         },
         id: false,
     });
@@ -34,6 +29,28 @@ const thoughtSchema = new Schema({
 thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
+
+
+
+
+// TRYING TO BUILD FORMAT DATETIME
+
+// // virtual (formats the date/time)
+// thoughtSchema.virtual('formatDateTime').get(function () {
+//     return this.createdAt.toLocaleDateString("en-US");
+// });
+
+// function formatDT(createdAt) {
+//     return createdAt.toLocaleDateString("en-US");
+// }
+
+// app.get(function(req, res){
+//     return Thought.createdAt.toLocaleDateString("en-US");
+// })
+
+
+
+
 
 // initialize model
 const Thought = model('Thought', thoughtSchema);

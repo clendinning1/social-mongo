@@ -1,20 +1,12 @@
 
 4. getter method to format the timestamp on query
 12. readme
-13. CURRENT ISSUE: delete reactions route, in controllers > thoughtController.js
 
 
 
 # yeah
 - you may also optionally use a JavaScript date library of your choice or the native JavaScript `Date` object to format timestamps.
 
-
-
-### API Routes
-
-**`/api/thoughts/:thoughtId/reactions`**
-
-* `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
 
 
 
