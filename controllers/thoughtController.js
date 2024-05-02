@@ -105,14 +105,12 @@ module.exports = {
     // delete a reaction from a thought
     async deleteReaction(req, res) {
         try {
-            // testing: successfully logged reactionToRemove
-            const reactionToRemove = await req.body.reactionId;
+            const reactionToRemove = await req.body;
 
             const thought = await Thought.findOneAndUpdate(
-                // testing: successfully logged req.params.thoughtId
                 { _id: req.params.thoughtId },
-                // testing: issue must be the next line (b/c reactions are a schema but not a model?)
-                { $pull: { reactions: reactionToRemove } }
+                { $pull: { reactions: reactionToRemove } },
+                { new: true }
             );
 
             res.json(thought);
